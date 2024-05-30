@@ -7,9 +7,6 @@ from torch.utils.data import DataLoader
 from torch.optim import Adam
 
 def train(chatData, model, optim, device):
-
-
-
     for i in tqdm.tqdm(range(epochs)):
         counter=0
         model.train()
