@@ -9,6 +9,5 @@ batch_size = 16
 max_len = 256
 train_len = 140000
 file_path = '../tum_data.csv'
-train = True
 special_symbols = ['<unk>', '<pad>', '<bos>', '<eos>']
 UNK_IDX, PAD_IDX, BOS_IDX, EOS_IDX = 0, 1, 2, 3
