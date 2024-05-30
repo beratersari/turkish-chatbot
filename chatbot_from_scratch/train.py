@@ -24,8 +24,6 @@ transformer     = Transformer(d_model, heads, num_layers, len(dataset.vocab_tran
 loss_fn         = torch.nn.CrossEntropyLoss(ignore_index = PAD_IDX)
 optimizer       = torch.optim.AdamW(transformer.parameters(), lr = 0.001, betas = (0.9, 0.98), eps = 1e-9)
 scaler          = GradScaler()
-train_indices = torch.randperm(len(dataset))[:train_len]
-eval_indices = torch.randperm(len(dataset))[train_len:]
 transformer.to(device)
 
 
@@ -34,7 +32,7 @@ transformer.to(device)
 
 def train_epoch():
     losses = 0
-    train_dataloader = DataLoader(dataset, batch_size=batch_size, sampler=SubsetRandomSampler(train_indices),
+    train_dataloader = DataLoader(dataset, batch_size=batch_size,
                                   num_workers=0, pin_memory=True)
 
     transformer.train()
