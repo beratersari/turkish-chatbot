@@ -18,18 +18,6 @@ from architecture import Transformer
 from dataset_util import ConversationDataset
 from config import *
 
-dataset         = ConversationDataset(file_path, max_len = max_len)
-transformer     = Transformer(d_model, heads, num_layers, len(dataset.vocab_transform))
-
-loss_fn         = torch.nn.CrossEntropyLoss(ignore_index = PAD_IDX)
-optimizer       = torch.optim.AdamW(transformer.parameters(), lr = 0.001, betas = (0.9, 0.98), eps = 1e-9)
-scaler          = GradScaler()
-transformer.to(device)
-
-
-# checkpoint  = torch.load('transformer.tar', map_location = device)
-# transformer.load_state_dict(checkpoint['model_state_dict'])
-
 def train_epoch():
     losses = 0
     train_dataloader = DataLoader(dataset, batch_size=batch_size,
@@ -82,6 +70,13 @@ def evaluate():
 
     return losses / len(eval_dataloader), accuracy / (total + EPS)
 
+dataset         = ConversationDataset(file_path, max_len = max_len)
+transformer     = Transformer(d_model, heads, num_layers, len(dataset.vocab_transform))
+
+loss_fn         = torch.nn.CrossEntropyLoss(ignore_index = PAD_IDX)
+optimizer       = torch.optim.AdamW(transformer.parameters(), lr = 0.001, betas = (0.9, 0.98), eps = 1e-9)
+scaler          = GradScaler()
+transformer.to(device)
 
 
 #checkpoint  = torch.load('transformer.tar', map_location = device)
