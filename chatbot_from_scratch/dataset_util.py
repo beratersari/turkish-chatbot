@@ -17,11 +17,9 @@ from torchtext.data.utils import get_tokenizer
 from torchtext.vocab import build_vocab_from_iterator
 from config import special_symbols, UNK_IDX, PAD_IDX, BOS_IDX, EOS_IDX
 class ConversationDataset(Dataset):
-    def __init__(self, file_path, max_len = 100, init_dataset = True) -> None:
+    def __init__(self, file_path, max_len = 256) -> None:
         super().__init__()
-
-        if init_dataset:
-            self._init_dataset(file_path, max_len)
+        self._init_dataset(file_path, max_len)
 
     def __len__(self):
         return len(self.src_batch)
