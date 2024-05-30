@@ -24,16 +24,6 @@ def train(chatData, model, optim, device):
             torch.save(model.state_dict(), f"model_state{i}.pt")
         model.eval()
         print("loss :",total_loss/len(chatData))
-        print(infer("Merhaba dizlerimde de dayanılmaz bir ağrı var. Kaslarım ağrıyor ve kemiğimde iğne batar gibi bir ağrı var. Bunun için ne yapabilirim?"))
-def infer(inp):
-    inp = "<startofstring> "+inp+" <bot>: "
-    inp = tokenizer(inp, return_tensors="pt")
-    X = inp["input_ids"].to(device)
-    a = inp["attention_mask"].to(device)
-    model.config.max_length = X.shape[1] + 256
-    output = model.generate(X, attention_mask=a )
-    output = tokenizer.decode(output[0])
-    return output
 model = GPT2LMHeadModel.from_pretrained("gpt2")
 model = model.to(device)
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
