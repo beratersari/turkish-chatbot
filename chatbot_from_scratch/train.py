@@ -85,7 +85,6 @@ def evaluate():
     return losses / len(eval_dataloader), accuracy / (total + EPS)
 
 
-epochs= 300
 
 #checkpoint  = torch.load('transformer.tar', map_location = device)
 #transformer.load_state_dict(checkpoint['model_state_dict'])
