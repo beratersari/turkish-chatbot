@@ -15,9 +15,6 @@ def train(chatData, model, optim, device):
         model.train()
         total_loss = 0
         for X, a in chatData:
-            counter+=1
-            if(counter%100==0):
-                print(counter)
             X = X.to(device)
             a = a.to(device)
             optim.zero_grad()
